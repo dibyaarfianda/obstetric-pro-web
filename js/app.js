@@ -140,6 +140,22 @@
 
         <a class="button button--ghost" href="#/" data-home>${icon('arrowLeft')} Semua topik</a>
       </article>`;
+    hydrate(view.querySelector('.topic__body'));
+  }
+
+  // Pasang gambar materi: piktogram untuk elemen [data-ico], ilustrasi untuk <figure data-illus>.
+  function hydrate(root) {
+    const picto = window.PICTO || {};
+    const illus = window.ILLUS || {};
+    root.querySelectorAll('[data-ico]').forEach((el) => {
+      const svg = picto[el.dataset.ico];
+      if (svg) el.insertAdjacentHTML('afterbegin', `<span class="pict" aria-hidden="true"><svg viewBox="0 0 24 24">${svg}</svg></span>`);
+    });
+    root.querySelectorAll('figure[data-illus]').forEach((el) => {
+      const svg = illus[el.dataset.illus];
+      if (svg) el.insertAdjacentHTML('afterbegin', svg);
+      else el.remove();
+    });
   }
 
   function renderMessage(title, text) {

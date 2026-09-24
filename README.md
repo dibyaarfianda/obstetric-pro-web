@@ -18,6 +18,7 @@ index.html              shell aplikasi (app bar, area konten, footer)
 css/app.css             gaya mobile-first + breakpoint 600px dan 960px, dukung dark mode
 js/app.js               router hash (#/ dan #/topik/<slug>), beranda per kategori, halaman topik, transisi, tombol Pasang, registrasi SW
 js/icons.js             ikon garis SVG untuk kartu topik (dirujuk lewat field `icon`)
+js/illustrations.js     gambar materi: piktogram (PICTO) dan ilustrasi SVG (ILLUS), dihasilkan oleh tools/build_illus.py
 data/topics.json        identitas situs (`site`), kategori (`categories`), dan topik (field `body` untuk isi materi HTML)
 sw.js                   service worker: precache shell, network-first untuk halaman/data, cache-first untuk aset
 manifest.webmanifest    metadata PWA
@@ -30,6 +31,7 @@ icons/                  ikon SVG, PNG 192/512, maskable, apple-touch-icon
 - `categories`: urutan kategori menentukan urutan bagian di beranda dan tombol Sebelumnya/Berikutnya. Warna kartu mengikuti kategori (`[data-cat]` di `css/app.css`).
 - Tiap topik: `slug`, `title`, `summary`, `category` (id kategori), `icon` (nama di `js/icons.js`), `urgent: true` untuk tampil di pita "Kenali tanda bahaya", dan `body`.
 - `body` berisi HTML sederhana: `<h2>` untuk sub-judul, `<ul>`/`<ol>`, `<div class="callout">` untuk kotak tips, `<div class="callout callout--danger">` untuk daftar tanda bahaya, `<div class="table-wrap"><table class="schedule">` untuk tabel jadwal, dan `<p class="source">` untuk baris acuan.
+- Gambar di `body`: tambahkan `data-ico="<nama>"` pada `<li>` di dalam `<ul class="signs">` (tanda bahaya), `<ul class="pict-list">` (daftar berikon), atau `<ul class="pict-grid">` (kartu; tambah `class="ok"`/`"no"` untuk tanda ✓/✕). Ilustrasi besar: `<figure class="illus" data-illus="anc|plate|latch|cord|sleep"><figcaption>…</figcaption></figure>`. Tahapan kunjungan: `<ol class="steps"><li><b>KF 1</b>6 jam–2 hari</li>…</ol>`. Nama ikon ada di `js/illustrations.js`; untuk menambah ikon, ubah `tools/build_illus.py` lalu jalankan `python3 tools/build_illus.py js/illustrations.js`.
 
 ## Menjalankan lokal
 
