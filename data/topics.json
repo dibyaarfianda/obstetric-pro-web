@@ -3,7 +3,7 @@
   "site": {
     "name": "Sehat Ibu & Bayi",
     "tagline": "Edukasi Kesehatan Ibu & Anak",
-    "facility": ""
+    "facility": "RSUD Gambiran Kota Kediri"
   },
   "categories": [
     { "id": "kehamilan", "title": "Kehamilan", "summary": "Periksa hamil, gizi, dan tanda bahaya selama hamil." },
