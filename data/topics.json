@@ -1,0 +1,15 @@
+{
+  "_note": "Daftar topik sementara. Judul dan ringkasan akan disempurnakan; isi materi tiap topik ditulis di field 'body' (HTML sederhana).",
+  "topics": [
+    { "slug": "pemeriksaan-kehamilan", "title": "Pemeriksaan Kehamilan", "summary": "Kapan dan berapa kali periksa hamil.", "category": "Kehamilan", "icon": "🤰", "color": "#f8bbd0" },
+    { "slug": "tanda-bahaya-kehamilan", "title": "Tanda Bahaya Kehamilan", "summary": "Gejala yang harus segera diperiksakan.", "category": "Kehamilan", "icon": "⚠️", "color": "#ffcdd2" },
+    { "slug": "gizi-ibu-hamil", "title": "Gizi Ibu Hamil", "summary": "Makanan seimbang dan tablet tambah darah.", "category": "Kehamilan", "icon": "🥗", "color": "#dcedc8" },
+    { "slug": "persiapan-persalinan", "title": "Persiapan Persalinan", "summary": "Rencana persalinan dan tanda mulai bersalin.", "category": "Persalinan", "icon": "🏥", "color": "#d1c4e9" },
+    { "slug": "masa-nifas", "title": "Perawatan Masa Nifas", "summary": "Pemulihan ibu dan tanda bahaya nifas.", "category": "Nifas", "icon": "🌸", "color": "#f3e5f5" },
+    { "slug": "asi-eksklusif", "title": "ASI Eksklusif", "summary": "Menyusui 6 bulan pertama dan cara pelekatan.", "category": "Bayi", "icon": "🍼", "color": "#fff9c4" },
+    { "slug": "perawatan-bayi-baru-lahir", "title": "Perawatan Bayi Baru Lahir", "summary": "Tali pusat, kehangatan, dan kebersihan bayi.", "category": "Bayi", "icon": "👶", "color": "#b3e5fc" },
+    { "slug": "tanda-bahaya-bayi", "title": "Tanda Bahaya Bayi Baru Lahir", "summary": "Kapan bayi harus segera dibawa ke dokter.", "category": "Bayi", "icon": "🚨", "color": "#ffe0b2" },
+    { "slug": "imunisasi", "title": "Imunisasi Dasar", "summary": "Jadwal imunisasi bayi dan manfaatnya.", "category": "Bayi", "icon": "💉", "color": "#c8e6c9" },
+    { "slug": "kb-pasca-persalinan", "title": "KB Pasca Persalinan", "summary": "Pilihan kontrasepsi setelah melahirkan.", "category": "Nifas", "icon": "🗓️", "color": "#e1bee7" }
+  ]
+}
