@@ -13,6 +13,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="Sehat Ibu">
   <link rel="stylesheet" href="css/app.css">
+  <script src="js/icons.js" defer></script>
   <script src="js/app.js" defer></script>
 </head>
 <body>
@@ -20,18 +21,22 @@
     <a class="app-bar__back" href="#/" aria-label="Kembali ke menu" hidden>
       <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
-    <a class="app-bar__brand" href="#/">
-      <img src="icons/icon.svg" alt="" width="32" height="32">
-      <span>Sehat Ibu &amp; Bayi</span>
+    <a class="app-bar__brand" href="#/" aria-label="Sehat Ibu &amp; Bayi, ke beranda">
+      <img src="icons/icon.svg" alt="" width="36" height="36">
+      <span class="app-bar__titles">
+        <span class="app-bar__name">Sehat Ibu &amp; Bayi</span>
+        <span class="app-bar__tagline">Edukasi Kesehatan Ibu &amp; Anak</span>
+      </span>
     </a>
     <button class="app-bar__install" type="button" hidden>Pasang</button>
   </header>
 
-  <main id="view" class="view" tabindex="-1" aria-live="polite">
+  <main id="view" class="view" tabindex="-1">
     <p class="loading">Memuat…</p>
   </main>
 
   <footer class="app-footer">
+    <p class="app-footer__facility" hidden></p>
     <p>Materi edukasi ini tidak menggantikan pemeriksaan tenaga kesehatan. Segera ke fasilitas kesehatan bila ada tanda bahaya.</p>
   </footer>
 

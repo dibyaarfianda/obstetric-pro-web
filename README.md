@@ -16,12 +16,19 @@ HTML, CSS, dan JavaScript biasa, tanpa framework dan tanpa build step.
 ```
 index.html              shell aplikasi (app bar, area konten, footer)
 css/app.css             gaya mobile-first + breakpoint 600px dan 960px, dukung dark mode
-js/app.js               router hash (#/ dan #/topik/<slug>), render menu, tombol Pasang, registrasi SW
-data/topics.json        daftar topik (placeholder; field `body` untuk isi materi HTML)
+js/app.js               router hash (#/ dan #/topik/<slug>), beranda per kategori, halaman topik, transisi, tombol Pasang, registrasi SW
+js/icons.js             ikon garis SVG untuk kartu topik (dirujuk lewat field `icon`)
+data/topics.json        identitas situs (`site`), kategori (`categories`), dan topik (field `body` untuk isi materi HTML)
 sw.js                   service worker: precache shell, network-first untuk halaman/data, cache-first untuk aset
 manifest.webmanifest    metadata PWA
 icons/                  ikon SVG, PNG 192/512, maskable, apple-touch-icon
 ```
+
+## Mengubah konten
+
+- `site.facility`: nama RS/puskesmas, tampil di footer bila diisi.
+- `categories`: urutan kategori menentukan urutan bagian di beranda dan tombol Sebelumnya/Berikutnya. Warna kartu mengikuti kategori (`[data-cat]` di `css/app.css`).
+- Tiap topik: `slug`, `title`, `summary`, `category` (id kategori), `icon` (nama di `js/icons.js`), `urgent: true` untuk tampil di pita "Kenali tanda bahaya", dan `body`.
 
 ## Menjalankan lokal
 
