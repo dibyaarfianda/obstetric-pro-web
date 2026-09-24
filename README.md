@@ -39,6 +39,24 @@ python3 -m http.server 8080
 
 Buka http://localhost:8080. Service worker hanya aktif di `localhost` atau HTTPS.
 
+## Publikasi (GitHub Pages)
+
+Situs dipublikasikan otomatis oleh `.github/workflows/pages.yml` setiap ada push ke `main`,
+ke alamat **https://dibyaarfianda.github.io/obstetric-pro-web/** (HTTPS otomatis dari GitHub).
+
+Aktivasi sekali saja: repo **Settings > Pages > Build and deployment > Source: GitHub Actions**.
+Setelah itu jalankan workflow dari tab **Actions** (atau tunggu push berikutnya ke `main`).
+
+Domain sendiri (opsional): isi **Settings > Pages > Custom domain** (mis. `edukasi.contoh-rs.go.id`),
+buat record DNS `CNAME` ke `dibyaarfianda.github.io`, lalu centang **Enforce HTTPS**.
+Semua path di situs relatif, jadi tidak perlu mengubah kode. Buat ulang QR code setelah pindah domain.
+
+## QR code
+
+File siap cetak ada di `qr/`: `qr-sehat-ibu.svg` (vektor), `qr-sehat-ibu.png` (~2000 px),
+dan `qr-sehat-ibu-kartu.png` (kartu 6 x 8 cm @300 dpi dengan judul dan alamat).
+Buat ulang untuk alamat lain: `python3 qr/buat_qr.py https://alamat-baru/`.
+
 ## Memperbarui
 
 Setiap kali mengubah file shell (HTML/CSS/JS/ikon), naikkan `VERSION` di `sw.js` agar pengguna mendapat versi baru.
