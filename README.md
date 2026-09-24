@@ -29,6 +29,7 @@ icons/                  ikon SVG, PNG 192/512, maskable, apple-touch-icon
 - `site.facility`: nama RS/puskesmas, tampil di footer bila diisi.
 - `categories`: urutan kategori menentukan urutan bagian di beranda dan tombol Sebelumnya/Berikutnya. Warna kartu mengikuti kategori (`[data-cat]` di `css/app.css`).
 - Tiap topik: `slug`, `title`, `summary`, `category` (id kategori), `icon` (nama di `js/icons.js`), `urgent: true` untuk tampil di pita "Kenali tanda bahaya", dan `body`.
+- `body` berisi HTML sederhana: `<h2>` untuk sub-judul, `<ul>`/`<ol>`, `<div class="callout">` untuk kotak tips, `<div class="callout callout--danger">` untuk daftar tanda bahaya, `<div class="table-wrap"><table class="schedule">` untuk tabel jadwal, dan `<p class="source">` untuk baris acuan.
 
 ## Menjalankan lokal
 
