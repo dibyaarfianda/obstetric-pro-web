@@ -1,6 +1,6 @@
 // Service worker: precache shell, network-first untuk data, cache-first untuk aset statis.
 // Naikkan VERSION setiap kali file shell berubah agar cache lama dibersihkan.
-const VERSION = 'v9';
+const VERSION = 'v10';
 const CACHE = `sehat-ibu-${VERSION}`;
 const SHELL = [
   './',
