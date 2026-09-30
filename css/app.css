@@ -291,6 +291,15 @@ a { color: var(--brand); }
 .topic h1, .message h1 { margin: 0; font-size: 1.45rem; line-height: 1.25; }
 .message h1 { margin-bottom: 12px; }
 .topic__summary { margin: 6px 0 0; color: var(--muted); }
+.topic__leaflet {
+  margin: 0 0 24px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--tint);
+  box-shadow: var(--shadow);
+}
+.topic__leaflet img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; }
 .topic__body { margin-bottom: 28px; overflow-wrap: break-word; }
 .topic__body > :first-child { margin-top: 0; }
 .topic__body h2 { margin: 28px 0 8px; font-size: 1.15rem; line-height: 1.3; color: var(--ink); }

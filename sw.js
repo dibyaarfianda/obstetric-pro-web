@@ -1,6 +1,6 @@
 // Service worker: precache shell, network-first untuk data, cache-first untuk aset statis.
 // Naikkan VERSION setiap kali file shell berubah agar cache lama dibersihkan.
-const VERSION = 'v8';
+const VERSION = 'v9';
 const CACHE = `sehat-ibu-${VERSION}`;
 const SHELL = [
   './',
@@ -25,6 +25,16 @@ const SHELL = [
   'img/illus/nifas_rest.jpg',
   'img/illus/kb_spacing.jpg',
   'img/illus/imun_shield.jpg',
+  'assets/leaflets/pemeriksaan-kehamilan.webp',
+  'assets/leaflets/tanda-bahaya-kehamilan.webp',
+  'assets/leaflets/gizi-ibu-hamil.webp',
+  'assets/leaflets/persiapan-persalinan.webp',
+  'assets/leaflets/masa-nifas.webp',
+  'assets/leaflets/kb-pasca-persalinan.webp',
+  'assets/leaflets/asi-eksklusif.webp',
+  'assets/leaflets/perawatan-bayi-baru-lahir.webp',
+  'assets/leaflets/tanda-bahaya-bayi.webp',
+  'assets/leaflets/imunisasi.webp',
 ];
 
 self.addEventListener('install', (event) => {

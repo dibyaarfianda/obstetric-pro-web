@@ -8,6 +8,18 @@
   const offlineBanner = document.querySelector('.offline-banner');
   const footerFacility = document.querySelector('.app-footer__facility');
   const ICONS = window.ICONS || {};
+  const LEAFLETS = {
+    'pemeriksaan-kehamilan': 'Bidan memeriksa tekanan darah ibu hamil dengan pendamping keluarga.',
+    'tanda-bahaya-kehamilan': 'Ibu hamil berkonsultasi dengan tenaga kesehatan saat khawatir akan tanda bahaya.',
+    'gizi-ibu-hamil': 'Ibu hamil dan pasangan menyiapkan makanan beragam dengan lauk, sayur, dan buah.',
+    'persiapan-persalinan': 'Calon orang tua menyiapkan tas persalinan sambil berdiskusi dengan bidan.',
+    'masa-nifas': 'Ibu beristirahat setelah melahirkan sementara keluarga membantu merawat rumah.',
+    'kb-pasca-persalinan': 'Orang tua berkonsultasi dengan tenaga kesehatan tentang perencanaan keluarga.',
+    'asi-eksklusif': 'Ibu menyusui bayinya dengan dukungan pasangan di rumah.',
+    'perawatan-bayi-baru-lahir': 'Orang tua merawat bayi baru lahir dan menyiapkan pakaiannya.',
+    'tanda-bahaya-bayi': 'Orang tua membawa bayi baru lahir ke tenaga kesehatan untuk segera diperiksa.',
+    imunisasi: 'Orang tua berkonsultasi dengan tenaga kesehatan mengenai imunisasi bayi.',
+  };
   let appTitle = document.title;
 
   let dataPromise;
@@ -111,6 +123,11 @@
             ${topic.summary ? `<p class="topic__summary">${esc(topic.summary)}</p>` : ''}
           </div>
         </header>
+
+        ${LEAFLETS[topic.slug] ? `
+        <figure class="topic__leaflet">
+          <img src="assets/leaflets/${esc(topic.slug)}.webp" alt="${esc(LEAFLETS[topic.slug])}" width="960" height="640" decoding="async">
+        </figure>` : ''}
 
         <div class="topic__body">
           ${topic.body || '<p class="placeholder">Materi untuk topik ini sedang disiapkan.</p>'}
