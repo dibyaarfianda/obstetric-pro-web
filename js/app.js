@@ -171,7 +171,7 @@
       const key = el.dataset.illus;
       const caption = el.querySelector('figcaption');
       const alt = caption ? caption.textContent : '';
-      el.insertAdjacentHTML('afterbegin', `<img class="illus__img" src="img/illus/${key}.jpg" alt="${esc(alt)}" loading="lazy" width="199" height="149" onerror="this.closest('figure').remove()">`);
+      el.insertAdjacentHTML('afterbegin', `<img class="illus__img" src="img/illus/${key}.jpg" alt="${esc(alt)}" loading="lazy" width="600" height="448" onerror="this.closest('figure').remove()">`);
     });
   }
 
