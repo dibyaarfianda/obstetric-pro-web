@@ -143,18 +143,18 @@
     hydrate(view.querySelector('.topic__body'));
   }
 
-  // Pasang gambar materi: piktogram untuk elemen [data-ico], ilustrasi untuk <figure data-illus>.
+  // Pasang gambar materi: piktogram untuk elemen [data-ico], ilustrasi (foto AI) untuk <figure data-illus>.
   function hydrate(root) {
     const picto = window.PICTO || {};
-    const illus = window.ILLUS || {};
     root.querySelectorAll('[data-ico]').forEach((el) => {
       const svg = picto[el.dataset.ico];
       if (svg) el.insertAdjacentHTML('afterbegin', `<span class="pict" aria-hidden="true"><svg viewBox="0 0 24 24">${svg}</svg></span>`);
     });
     root.querySelectorAll('figure[data-illus]').forEach((el) => {
-      const svg = illus[el.dataset.illus];
-      if (svg) el.insertAdjacentHTML('afterbegin', svg);
-      else el.remove();
+      const key = el.dataset.illus;
+      const caption = el.querySelector('figcaption');
+      const alt = caption ? caption.textContent : '';
+      el.insertAdjacentHTML('afterbegin', `<img class="illus__img" src="img/illus/${key}.jpg" alt="${esc(alt)}" loading="lazy" width="199" height="149" onerror="this.closest('figure').remove()">`);
     });
   }
 

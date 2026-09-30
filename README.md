@@ -18,7 +18,8 @@ index.html              shell aplikasi (app bar, area konten, footer)
 css/app.css             gaya mobile-first + breakpoint 600px dan 960px, dukung dark mode
 js/app.js               router hash (#/ dan #/topik/<slug>), beranda per kategori, halaman topik, transisi, tombol Pasang, registrasi SW
 js/icons.js             ikon garis SVG untuk kartu topik (dirujuk lewat field `icon`)
-js/illustrations.js     gambar materi: piktogram (PICTO) dan ilustrasi SVG (ILLUS), dihasilkan oleh tools/build_illus.py
+js/illustrations.js     piktogram kecil (PICTO, 24x24, dipakai lewat `data-ico`), dihasilkan oleh tools/build_illus.py
+img/illus/               11 ilustrasi besar materi, gambar AI (JPG), dipasang oleh js/app.js lewat `<figure data-illus="...">`
 data/topics.json        identitas situs (`site`), kategori (`categories`), dan topik (field `body` untuk isi materi HTML)
 sw.js                   service worker: precache shell, network-first untuk halaman/data, cache-first untuk aset
 manifest.webmanifest    metadata PWA
@@ -31,9 +32,8 @@ icons/                  ikon SVG, PNG 192/512, maskable, apple-touch-icon
 - `categories`: urutan kategori menentukan urutan bagian di beranda dan tombol Sebelumnya/Berikutnya. Warna kartu mengikuti kategori (`[data-cat]` di `css/app.css`).
 - Tiap topik: `slug`, `title`, `summary`, `category` (id kategori), `icon` (nama di `js/icons.js`), `urgent: true` untuk tampil di pita "Kenali tanda bahaya", dan `body`.
 - `body` berisi HTML sederhana: `<h2>` untuk sub-judul, `<ul>`/`<ol>`, `<div class="callout">` untuk kotak tips, `<div class="callout callout--danger">` untuk daftar tanda bahaya, `<div class="table-wrap"><table class="schedule">` untuk tabel jadwal, dan `<p class="source">` untuk baris acuan.
-- Gambar di `body`: tambahkan `data-ico="<nama>"` pada `<li>` di dalam `<ul class="signs">` (tanda bahaya), `<ul class="pict-list">` (daftar berikon), atau `<ul class="pict-grid">` (kartu; tambah `class="ok"`/`"no"` untuk tanda ✓/✕). Ilustrasi besar: `<figure class="illus" data-illus="anc|plate|latch|cord|sleep"><figcaption>…</figcaption></figure>`. Tahapan kunjungan: `<ol class="steps"><li><b>KF 1</b>6 jam–2 hari</li>…</ol>`. Nama ikon ada di `js/illustrations.js`; untuk menambah ikon, ubah `tools/build_illus.py` lalu jalankan `python3 tools/build_illus.py js/illustrations.js`.
-- Ilustrasi bergaya leaflet (`p4k`, `danger_mom`, `danger_baby`, `nifas_rest`, `kb_spacing`, `imun_shield`) digambar ulang sebagai SVG orisinal, terinspirasi gaya flyer Promkes Kemenkes/stiker P4K, bukan salinan file asli — lihat catatan sumber di README ini atau PR yang menambahkannya.
-- Semua ilustrasi besar (fungsi `card()` di `tools/build_illus.py`) memakai banner judul warna blok dan badge lingkaran solid (`icon_at(..., tone='ink'|'a'|'b')`), gaya komposisi leaflet promosi kesehatan resmi (mis. CHP Hong Kong, Promkes Kemenkes) — hanya gaya visual yang ditiru, bukan gambar aslinya.
+- Gambar di `body`: tambahkan `data-ico="<nama>"` pada `<li>` di dalam `<ul class="signs">` (tanda bahaya), `<ul class="pict-list">` (daftar berikon), atau `<ul class="pict-grid">` (kartu; tambah `class="ok"`/`"no"` untuk tanda ✓/✕). Ilustrasi besar: `<figure class="illus" data-illus="anc|plate|latch|cord|sleep|p4k|danger_mom|danger_baby|nifas_rest|kb_spacing|imun_shield"><figcaption>…</figcaption></figure>` — `data-illus` merujuk ke file `img/illus/<nama>.jpg`. Tahapan kunjungan: `<ol class="steps"><li><b>KF 1</b>6 jam–2 hari</li>…</ol>`. Nama piktogram kecil ada di `js/illustrations.js`; untuk menambah piktogram, ubah `tools/build_illus.py` lalu jalankan `python3 tools/build_illus.py js/illustrations.js`.
+- 11 ilustrasi besar di `img/illus/` dibuat dengan image-generation AI (gaya flat vector, palet pastel per kategori), bukan foto atau ilustrasi asli pihak lain. Untuk mengganti satu topik, generate ulang gambar dengan prompt serupa (lihat riwayat PR) dan timpa file JPG-nya; tidak perlu menjalankan skrip apa pun.
 
 ## Menjalankan lokal
 
