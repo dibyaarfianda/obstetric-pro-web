@@ -90,6 +90,12 @@ def text(x, y, s, cls='t', anchor='middle'):
 def svg(w, h, inner, label):
     return f'<svg class="illus__svg" viewBox="0 0 {w} {h}" role="img" aria-label="{label}">{inner}</svg>'
 
+def icon_at(x, y, name, r=13):
+    # Piktogram P[name] (24x24) ditaruh di dalam lingkaran kecil, dipakai di ilustrasi bergaya leaflet.
+    s = (r * 2 / 24) * 0.72
+    return (f'<circle class="s-tint" cx="{x}" cy="{y}" r="{r}"/>'
+            f'<g class="s-ink picto-mini" transform="translate({x - r * 0.72:.1f} {y - r * 0.72:.1f}) scale({s:.3f})">{P[name]}</g>')
+
 # 1) Jadwal periksa hamil: 3 trimester, 6 kunjungan, 2 dengan dokter.
 def anc():
     X = lambda w: 20 + w / 40 * 300
@@ -195,7 +201,102 @@ def sleep():
            text(272, 134, 'Tanpa bantal &amp; boneka', 't s')]
     return svg(340, 150, ''.join(out), 'Bayi tidur telentang di kasur yang rata, tanpa bantal dan boneka di sekitarnya.')
 
-ILLUS = {'anc': anc(), 'plate': plate(), 'latch': latch(), 'cord': cord(), 'sleep': sleep()}
+# 6) Stiker P4K (Program Perencanaan Persalinan & Pencegahan Komplikasi): kartu isian
+#    yang biasa ditempel di rumah ibu hamil. Gaya "form" resmi Kemenkes digambar ulang,
+#    bukan salinan stiker asli.
+def p4k():
+    out = ['<path class="s-surf s-outline" d="M14 8h248l24 24v168a8 8 0 0 1-8 8H14a8 8 0 0 1-8-8V16a8 8 0 0 1 8-8z"/>',
+           '<path class="s-tint" d="M262 8l24 24h-24z"/>',
+           text(150, 40, 'STIKER P4K', 't b ink'),
+           text(150, 56, 'Program Perencanaan Persalinan &amp;', 't s m'),
+           text(150, 70, 'Pencegahan Komplikasi', 't s m'),
+           '<path class="s-line2 thin" d="M22 82h256"/>']
+    rows = [('people', 'Penolong persalinan'), ('hospital', 'Tempat bersalin'),
+            ('car', 'Transportasi'), ('bloodbag', 'Calon donor darah')]
+    for i, (ico, label) in enumerate(rows):
+        y = 110 + i * 34
+        out.append(icon_at(40, y, ico))
+        out.append(text(64, y - 6, label, 't b', 'start'))
+        out.append(f'<path class="s-line2 thin" d="M64 {y + 8}h210"/>')
+    out.append(text(150, 250, 'Ditempel di rumah agar keluarga siap membantu', 't s m'))
+    return svg(300, 264, ''.join(out), 'Stiker P4K: catatan penolong persalinan, tempat bersalin, transportasi, dan calon donor darah, ditempel di rumah ibu hamil.')
+
+# 7) Sampul "kenali tanda bahaya" untuk ibu hamil.
+def danger_mom():
+    out = ['<circle class="s-skin s-outline" cx="62" cy="38" r="22"/>',
+           '<path class="s-line2" d="M44 28c2-10 10-16 18-16s16 5 18 14"/>',
+           '<path class="s-skin s-outline" d="M36 60c-8 8-12 22-12 42 0 28 16 46 38 46s38-18 38-46c0-16-4-29-11-38"/>',
+           '<ellipse class="s-skin s-outline" cx="64" cy="120" rx="32" ry="28"/>',
+           '<g transform="translate(148 10)">'
+           '<path class="s-alertfill" d="M30 2 58 52H2z"/>'
+           '<rect class="s-surf" x="27" y="18" width="6" height="20" rx="3"/>'
+           '<circle class="s-surf" cx="30" cy="44" r="3.6"/>'
+           '</g>',
+           '<path class="s-line2 thin" d="M8 160h284"/>']
+    out.append(icon_at(30, 188, 'phone'))
+    out.append(text(52, 182, 'Segera ke bidan atau', 't s', 'start'))
+    out.append(text(52, 196, 'faskes terdekat', 't s', 'start'))
+    return svg(300, 208, ''.join(out), 'Ibu hamil dengan tanda bahaya: segera ke bidan atau fasilitas kesehatan terdekat.')
+
+# 8) Sampul "kenali tanda bahaya" untuk bayi baru lahir.
+def danger_baby():
+    out = ['<rect class="s-skin s-outline" x="26" y="88" width="96" height="42" rx="21"/>',
+           '<circle class="s-skin s-outline" cx="32" cy="84" r="24"/>',
+           '<path class="s-line2" d="M22 70c1-5 5-8 10-8"/>',
+           '<g transform="translate(148 10)">'
+           '<path class="s-alertfill" d="M30 2 58 52H2z"/>'
+           '<rect class="s-surf" x="27" y="18" width="6" height="20" rx="3"/>'
+           '<circle class="s-surf" cx="30" cy="44" r="3.6"/>'
+           '</g>',
+           '<path class="s-line2 thin" d="M8 142h284"/>']
+    out.append(icon_at(30, 170, 'fever'))
+    out.append(text(52, 164, 'Segera ke bidan atau', 't s', 'start'))
+    out.append(text(52, 178, 'faskes terdekat', 't s', 'start'))
+    return svg(300, 190, ''.join(out), 'Bayi dengan tanda bahaya: segera ke bidan atau fasilitas kesehatan terdekat.')
+
+# 9) Ibu nifas: istirahat, makan bergizi, periksa rutin.
+def nifas_rest():
+    out = ['<circle class="s-skin s-outline" cx="70" cy="40" r="22"/>',
+           '<path class="s-line2" d="M50 30c2-10 10-16 20-16s17 6 19 15"/>',
+           '<path class="s-skin s-outline" d="M40 60c-14 10-20 26-20 48 0 4 2 6 6 6h96c4 0 6-2 6-6 0-22-6-38-20-48"/>',
+           '<ellipse class="s-skin s-outline" cx="70" cy="96" rx="34" ry="22"/>',
+           '<circle class="s-skin s-outline" cx="70" cy="86" r="12"/>']
+    for i, (ico, label) in enumerate([('moon', 'Istirahat cukup'), ('fish', 'Makan bergizi'), ('clock', 'Periksa rutin')]):
+        y = 26 + i * 54
+        out.append(icon_at(190, y, ico))
+        out.append(text(212, y - 6, label, 't b', 'start'))
+    return svg(300, 176, ''.join(out), 'Ibu nifas: istirahat cukup, makan bergizi, dan periksa nifas rutin sesuai jadwal.')
+
+# 10) Jarak kehamilan minimal 2 tahun, didukung KB pasca persalinan.
+def kb_spacing():
+    def family(ox, oy):
+        return (f'<g transform="translate({ox} {oy})">'
+                '<circle class="s-skin s-outline" cx="0" cy="14" r="12"/><path class="s-skin s-outline" d="M-14 34c0-10 6-16 14-16s14 6 14 16"/>'
+                '<circle class="s-skin s-outline" cx="30" cy="14" r="12"/><path class="s-skin s-outline" d="M16 34c0-10 6-16 14-16s14 6 14 16"/>'
+                '<circle class="s-skin s-outline" cx="15" cy="46" r="8"/><path class="s-skin s-outline" d="M5 62c0-7 4.5-11 10-11s10 4 10 11"/>'
+                '</g>')
+    out = [family(20, 10), family(230, 10),
+           '<path class="s-line2" d="M90 100h130" stroke-dasharray="5 6"/>',
+           '<path class="s-line2" d="M90 94v12M220 94v12"/>',
+           text(155, 88, 'Jarak kehamilan', 't b'),
+           text(155, 122, 'minimal 2 tahun', 't b ink')]
+    return svg(300, 140, ''.join(out), 'Jarak kehamilan minimal 2 tahun antar anak, didukung KB pasca persalinan.')
+
+# 11) Imunisasi lengkap melindungi anak.
+def imun_shield():
+    out = ['<circle class="s-skin s-outline" cx="60" cy="70" r="26"/>',
+           '<path class="s-skin s-outline" d="M30 96c-4 14-4 30 0 42h60c4-12 4-28 0-42"/>',
+           '<path class="s-line2" d="M46 58c1-6 6-10 12-10"/>',
+           '<g transform="translate(150 20)">'
+           '<path class="s-ink" d="M45 0 90 16v34c0 34-22 56-45 66C22 106 0 84 0 50V16z"/>'
+           '<path class="s-white" d="M26 54l14 14 26-30"/>'
+           '</g>',
+           ]
+    return svg(300, 148, ''.join(out), 'Bayi yang diimunisasi lengkap sesuai jadwal terlindungi dari penyakit berbahaya.')
+
+ILLUS = {'anc': anc(), 'plate': plate(), 'latch': latch(), 'cord': cord(), 'sleep': sleep(),
+         'p4k': p4k(), 'danger_mom': danger_mom(), 'danger_baby': danger_baby(),
+         'nifas_rest': nifas_rest(), 'kb_spacing': kb_spacing(), 'imun_shield': imun_shield()}
 
 js = ('// Gambar untuk isi materi, digambar sebagai SVG agar ringan, tajam, dan ikut mode gelap.\n'
       '// PICTO: piktogram 24x24 (dipakai lewat atribut data-ico). ILLUS: ilustrasi besar (lewat <figure data-illus>).\n'
