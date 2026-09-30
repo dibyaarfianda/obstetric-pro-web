@@ -482,7 +482,14 @@ a { color: var(--brand); }
 .illus .s-band { fill: var(--ink); }
 .illus .s-band-a { fill: var(--accent-a); }
 .illus .s-band-b { fill: var(--accent-b); }
+.illus .s-band, .illus .s-band-a, .illus .s-band-b {
+  stroke: var(--surface);
+  stroke-width: 3;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, .16));
+}
 .illus .picto-mini.oninv { color: var(--surface); stroke-width: 2.1; }
+/* Blob organik lembut di belakang figur utama, gaya flat illustration modern. */
+.illus .s-blob { fill: var(--tint); }
 .topic__body .note, .topic__body .source { color: var(--muted); font-size: .85rem; }
 .topic__body .source { margin-top: 24px; padding-top: 12px; border-top: 1px solid var(--border); }
 .placeholder {
