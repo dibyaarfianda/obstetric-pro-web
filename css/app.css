@@ -470,6 +470,9 @@ a { color: var(--brand); }
 .illus .s-okfill { fill: var(--ok); }
 .illus .s-nofill { fill: var(--alert-ink); }
 .illus .s-white { fill: none; stroke: var(--on-badge); stroke-width: 2.5; stroke-linecap: round; }
+.illus .s-alertfill { fill: var(--alert-ink); }
+.illus .picto-mini { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.illus .picto-mini .a { fill: currentColor; fill-opacity: .18; }
 .topic__body .note, .topic__body .source { color: var(--muted); font-size: .85rem; }
 .topic__body .source { margin-top: 24px; padding-top: 12px; border-top: 1px solid var(--border); }
 .placeholder {
