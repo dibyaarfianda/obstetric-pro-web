@@ -98,6 +98,13 @@ def icon_at(x, y, name, r=17, tone='ink'):
     return (f'<circle class="{cls}" cx="{x}" cy="{y}" r="{r}"/>'
             f'<g class="picto-mini oninv" transform="translate({x - r * 0.64:.1f} {y - r * 0.64:.1f}) scale({s:.3f})">{P[name]}</g>')
 
+def blob(cx, cy, r):
+    # Blob organik lembut (kluster lingkaran offset) di belakang figur utama —
+    # teknik umum flat illustration modern supaya tidak terasa "gambar mengambang" di latar polos.
+    return (f'<circle class="s-blob" cx="{cx - r * 0.32:.1f}" cy="{cy - r * 0.22:.1f}" r="{r * 0.78:.1f}"/>'
+            f'<circle class="s-blob" cx="{cx + r * 0.36:.1f}" cy="{cy + r * 0.14:.1f}" r="{r * 0.88:.1f}"/>'
+            f'<circle class="s-blob" cx="{cx:.1f}" cy="{cy + r * 0.3:.1f}" r="{r * 0.72:.1f}"/>')
+
 def card(w, h, title, inner, label, bandh=36, gap=12):
     # Bungkus konten ilustrasi dengan banner judul warna blok di atas, gaya header leaflet
     # promosi resmi (mis. CHP/Promkes): banner solid + teks putih tebal, bukan judul teks polos.
@@ -229,7 +236,8 @@ def p4k():
 
 # 7) Sampul "kenali tanda bahaya" untuk ibu hamil.
 def danger_mom():
-    out = ['<circle class="s-skin s-outline" cx="62" cy="38" r="22"/>',
+    out = [blob(64, 78, 68),
+           '<circle class="s-skin s-outline" cx="62" cy="38" r="22"/>',
            '<path class="s-line2" d="M44 28c2-10 10-16 18-16s16 5 18 14"/>',
            '<path class="s-skin s-outline" d="M36 60c-8 8-12 22-12 42 0 28 16 46 38 46s38-18 38-46c0-16-4-29-11-38"/>',
            '<ellipse class="s-skin s-outline" cx="64" cy="120" rx="32" ry="28"/>',
@@ -246,7 +254,8 @@ def danger_mom():
 
 # 8) Sampul "kenali tanda bahaya" untuk bayi baru lahir.
 def danger_baby():
-    out = ['<rect class="s-skin s-outline" x="26" y="88" width="96" height="42" rx="21"/>',
+    out = [blob(72, 100, 66),
+           '<rect class="s-skin s-outline" x="26" y="88" width="96" height="42" rx="21"/>',
            '<circle class="s-skin s-outline" cx="32" cy="84" r="24"/>',
            '<path class="s-line2" d="M22 70c1-5 5-8 10-8"/>',
            '<g transform="translate(148 10)">'
@@ -262,7 +271,8 @@ def danger_baby():
 
 # 9) Ibu nifas: istirahat, makan bergizi, periksa rutin.
 def nifas_rest():
-    out = ['<circle class="s-skin s-outline" cx="70" cy="40" r="22"/>',
+    out = [blob(70, 78, 72),
+           '<circle class="s-skin s-outline" cx="70" cy="40" r="22"/>',
            '<path class="s-line2" d="M50 30c2-10 10-16 20-16s17 6 19 15"/>',
            '<path class="s-skin s-outline" d="M40 60c-14 10-20 26-20 48 0 4 2 6 6 6h96c4 0 6-2 6-6 0-22-6-38-20-48"/>',
            '<ellipse class="s-skin s-outline" cx="70" cy="96" rx="34" ry="22"/>',
@@ -290,7 +300,8 @@ def kb_spacing():
 
 # 11) Imunisasi lengkap melindungi anak.
 def imun_shield():
-    out = ['<circle class="s-skin s-outline" cx="60" cy="70" r="26"/>',
+    out = [blob(60, 92, 58),
+           '<circle class="s-skin s-outline" cx="60" cy="70" r="26"/>',
            '<path class="s-skin s-outline" d="M30 96c-4 14-4 30 0 42h60c4-12 4-28 0-42"/>',
            '<path class="s-line2" d="M46 58c1-6 6-10 12-10"/>',
            '<g transform="translate(150 20)">'
