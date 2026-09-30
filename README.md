@@ -33,6 +33,7 @@ icons/                  ikon SVG, PNG 192/512, maskable, apple-touch-icon
 - `body` berisi HTML sederhana: `<h2>` untuk sub-judul, `<ul>`/`<ol>`, `<div class="callout">` untuk kotak tips, `<div class="callout callout--danger">` untuk daftar tanda bahaya, `<div class="table-wrap"><table class="schedule">` untuk tabel jadwal, dan `<p class="source">` untuk baris acuan.
 - Gambar di `body`: tambahkan `data-ico="<nama>"` pada `<li>` di dalam `<ul class="signs">` (tanda bahaya), `<ul class="pict-list">` (daftar berikon), atau `<ul class="pict-grid">` (kartu; tambah `class="ok"`/`"no"` untuk tanda ✓/✕). Ilustrasi besar: `<figure class="illus" data-illus="anc|plate|latch|cord|sleep"><figcaption>…</figcaption></figure>`. Tahapan kunjungan: `<ol class="steps"><li><b>KF 1</b>6 jam–2 hari</li>…</ol>`. Nama ikon ada di `js/illustrations.js`; untuk menambah ikon, ubah `tools/build_illus.py` lalu jalankan `python3 tools/build_illus.py js/illustrations.js`.
 - Ilustrasi bergaya leaflet (`p4k`, `danger_mom`, `danger_baby`, `nifas_rest`, `kb_spacing`, `imun_shield`) digambar ulang sebagai SVG orisinal, terinspirasi gaya flyer Promkes Kemenkes/stiker P4K, bukan salinan file asli — lihat catatan sumber di README ini atau PR yang menambahkannya.
+- Semua ilustrasi besar (fungsi `card()` di `tools/build_illus.py`) memakai banner judul warna blok dan badge lingkaran solid (`icon_at(..., tone='ink'|'a'|'b')`), gaya komposisi leaflet promosi kesehatan resmi (mis. CHP Hong Kong, Promkes Kemenkes) — hanya gaya visual yang ditiru, bukan gambar aslinya.
 
 ## Menjalankan lokal
 
