@@ -13,8 +13,6 @@
   --shadow: 0 1px 2px rgba(80, 20, 45, .06), 0 4px 14px rgba(80, 20, 45, .06);
   --alert-bg: #ffebee;
   --alert-ink: #c62828;
-  --accent-a: #e65100;
-  --accent-b: #00695c;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
   color-scheme: light dark;
@@ -32,8 +30,6 @@
     --shadow: none;
     --alert-bg: #3a1a1d;
     --alert-ink: #ff8a80;
-    --accent-a: #ffb74d;
-    --accent-b: #4db6ac;
   }
 }
 
@@ -322,9 +318,9 @@ a { color: var(--brand); }
 .schedule th { background: var(--tint); }
 .schedule td:first-child { white-space: nowrap; font-weight: 600; }
 /* Gambar dalam materi: piktogram (data-ico) dan ilustrasi (figure.illus). */
-:root { --ok: #2e7d32; --on-badge: #fff; --skin: #f4d0bb; --f-veg: #7cb342; --f-fruit: #ffa726; --f-carb: #f3d27a; --f-prot: #c98b5a; }
+:root { --ok: #2e7d32; --on-badge: #fff; }
 @media (prefers-color-scheme: dark) {
-  :root { --ok: #81c784; --on-badge: #1a0f14; --skin: #d9a88c; --f-veg: #689f38; --f-fruit: #f59331; --f-carb: #d8b75e; --f-prot: #b5794b; }
+  :root { --ok: #81c784; --on-badge: #1a0f14; }
 }
 .pict {
   position: relative;
@@ -438,58 +434,8 @@ a { color: var(--brand); }
   background: var(--surface);
   box-shadow: var(--shadow);
 }
-.illus__svg { display: block; width: 100%; height: auto; max-width: 480px; margin: 0 auto; }
+.illus__img { display: block; width: 100%; height: auto; max-width: 420px; margin: 0 auto; border-radius: 12px; box-shadow: 0 1px 3px rgba(0, 0, 0, .18); }
 .illus figcaption { margin-top: 8px; color: var(--muted); font-size: .85rem; text-align: center; }
-.illus .t { font: 500 12px system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: var(--text); }
-.illus .t.b { font-weight: 700; }
-.illus .t.s { font-size: 11px; }
-.illus .t.m { fill: var(--muted); }
-.illus .t.inv { fill: var(--surface); }
-.illus .t.ink { fill: var(--ink); }
-.illus .okc { fill: var(--ok); }
-.illus .noc { fill: var(--alert-ink); }
-.illus .seg { fill: var(--ink); fill-opacity: .22; }
-.illus .seg.o2 { fill-opacity: .4; }
-.illus .seg.o3 { fill-opacity: .6; }
-.illus .s-ink { fill: var(--ink); }
-.illus .s-surf { fill: var(--surface); }
-.illus .s-tint { fill: var(--tint); }
-.illus .s-stroke { stroke: var(--ink); stroke-width: 2; }
-.illus .s-stroke2 { stroke: var(--border); stroke-width: 3; }
-.illus .s-line { fill: none; stroke: var(--ink); stroke-width: 2; }
-.illus .s-line2 { fill: none; stroke: var(--text); stroke-width: 2; stroke-linecap: round; }
-.illus .s-line2.thin { stroke-width: 1.5; opacity: .45; }
-.illus .s-sep { stroke: var(--surface); stroke-width: 3; }
-.illus .s-deco { fill: #fff; fill-opacity: .45; }
-.illus .f-veg { fill: var(--f-veg); }
-.illus .f-fruit { fill: var(--f-fruit); }
-.illus .f-carb { fill: var(--f-carb); }
-.illus .f-prot { fill: var(--f-prot); }
-.illus .s-skin { fill: var(--skin); }
-.illus .s-outline { stroke: var(--text); stroke-width: 2; stroke-linejoin: round; }
-.illus .s-areola { fill: #b8705e; }
-.illus .s-mouth { fill: #7a2e3a; }
-.illus .s-lip { fill: none; stroke: #c0506a; stroke-width: 4; stroke-linecap: round; }
-.illus .s-inkfill { fill: var(--text); }
-.illus .s-cord { fill: #e9dba9; stroke: var(--text); stroke-width: 1.5; }
-.illus .s-okfill { fill: var(--ok); }
-.illus .s-nofill { fill: var(--alert-ink); }
-.illus .s-white { fill: none; stroke: var(--on-badge); stroke-width: 2.5; stroke-linecap: round; }
-.illus .s-alertfill { fill: var(--alert-ink); }
-.illus .picto-mini { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.illus .picto-mini .a { fill: currentColor; fill-opacity: .18; }
-/* Gaya leaflet promosi: banner judul warna blok + badge lingkaran solid, meniru komposisi leaflet kesehatan resmi (bukan menyalin gambarnya). */
-.illus .s-band { fill: var(--ink); }
-.illus .s-band-a { fill: var(--accent-a); }
-.illus .s-band-b { fill: var(--accent-b); }
-.illus .s-band, .illus .s-band-a, .illus .s-band-b {
-  stroke: var(--surface);
-  stroke-width: 3;
-  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, .16));
-}
-.illus .picto-mini.oninv { color: var(--surface); stroke-width: 2.1; }
-/* Blob organik lembut di belakang figur utama, gaya flat illustration modern. */
-.illus .s-blob { fill: var(--tint); }
 .topic__body .note, .topic__body .source { color: var(--muted); font-size: .85rem; }
 .topic__body .source { margin-top: 24px; padding-top: 12px; border-top: 1px solid var(--border); }
 .placeholder {
