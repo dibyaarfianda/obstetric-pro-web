@@ -90,11 +90,20 @@ def text(x, y, s, cls='t', anchor='middle'):
 def svg(w, h, inner, label):
     return f'<svg class="illus__svg" viewBox="0 0 {w} {h}" role="img" aria-label="{label}">{inner}</svg>'
 
-def icon_at(x, y, name, r=13):
-    # Piktogram P[name] (24x24) ditaruh di dalam lingkaran kecil, dipakai di ilustrasi bergaya leaflet.
-    s = (r * 2 / 24) * 0.72
-    return (f'<circle class="s-tint" cx="{x}" cy="{y}" r="{r}"/>'
-            f'<g class="s-ink picto-mini" transform="translate({x - r * 0.72:.1f} {y - r * 0.72:.1f}) scale({s:.3f})">{P[name]}</g>')
+def icon_at(x, y, name, r=17, tone='ink'):
+    # Piktogram P[name] (24x24) dalam badge lingkaran warna blok (gaya leaflet promosi):
+    # isi solid + ikon putih di dalamnya, bukan lingkaran tint tipis seperti sebelumnya.
+    cls = {'ink': 's-band', 'a': 's-band-a', 'b': 's-band-b'}[tone]
+    s = (r * 2 / 24) * 0.64
+    return (f'<circle class="{cls}" cx="{x}" cy="{y}" r="{r}"/>'
+            f'<g class="picto-mini oninv" transform="translate({x - r * 0.64:.1f} {y - r * 0.64:.1f}) scale({s:.3f})">{P[name]}</g>')
+
+def card(w, h, title, inner, label, bandh=36, gap=12):
+    # Bungkus konten ilustrasi dengan banner judul warna blok di atas, gaya header leaflet
+    # promosi resmi (mis. CHP/Promkes): banner solid + teks putih tebal, bukan judul teks polos.
+    band = (f'<rect class="s-band" x="0" y="0" width="{w}" height="{bandh}" rx="10"/>'
+            + text(w / 2, bandh * 0.65, title, 't b inv'))
+    return svg(w, h + bandh + gap, band + f'<g transform="translate(0 {bandh + gap})">{inner}</g>', label)
 
 # 1) Jadwal periksa hamil: 3 trimester, 6 kunjungan, 2 dengan dokter.
 def anc():
@@ -115,7 +124,7 @@ def anc():
         out.append(text(X(w), 48, n, 't b ' + ('inv' if doc else 'ink')))
     out.append('<circle class="s-ink" cx="30" cy="118" r="7"/>' + text(44, 122, 'Dengan dokter (termasuk USG)', 't s', 'start'))
     out.append('<circle class="s-surf s-stroke" cx="30" cy="140" r="7"/>' + text(44, 144, 'Dengan bidan atau dokter', 't s', 'start'))
-    return svg(340, 156, ''.join(out), 'Jadwal minimal 6 kali periksa hamil: 1 kali di trimester 1, 2 kali di trimester 2, 3 kali di trimester 3; 2 di antaranya dengan dokter.')
+    return card(340, 156, 'JADWAL PERIKSA HAMIL', ''.join(out), 'Jadwal minimal 6 kali periksa hamil: 1 kali di trimester 1, 2 kali di trimester 2, 3 kali di trimester 3; 2 di antaranya dengan dokter.')
 
 # 2) Isi Piringku.
 def plate():
@@ -141,7 +150,7 @@ def plate():
         y = 44 + i * 38
         out.append(f'<rect class="{c}" x="210" y="{y-12}" width="16" height="16" rx="4"/>')
         out.append(text(234, y, a, 't b', 'start') + text(234, y + 16, b, 't s m', 'start'))
-    return svg(340, 200, ''.join(out), 'Isi Piringku: setengah piring sayur dan buah, setengah piring makanan pokok dan lauk-pauk.')
+    return card(340, 200, 'ISI PIRINGKU', ''.join(out), 'Isi Piringku: setengah piring sayur dan buah, setengah piring makanan pokok dan lauk-pauk.')
 
 # 3) Pelekatan menyusui: benar vs salah (tampak samping, skematis).
 def latch():
@@ -167,7 +176,7 @@ def latch():
         g.append(text(80, 196, 'Mulut lebar, areola masuk' if ok else 'Hanya puting yang diisap', 't s m'))
         g.append('</g>')
         return ''.join(g)
-    return svg(340, 206, panel(4, True) + panel(176, False), 'Pelekatan benar: mulut bayi terbuka lebar dan sebagian besar areola masuk. Pelekatan salah: bayi hanya mengisap puting.')
+    return card(340, 206, 'PELEKATAN MENYUSUI', panel(4, True) + panel(176, False), 'Pelekatan benar: mulut bayi terbuka lebar dan sebagian besar areola masuk. Pelekatan salah: bayi hanya mengisap puting.')
 
 # 4) Perawatan tali pusat.
 def cord():
@@ -183,7 +192,7 @@ def cord():
            text(196, 113, 'Popok dilipat', 't b', 'start'), text(196, 129, 'di bawah tali pusat', 't s', 'start'),
            '<g transform="translate(205 152)"><circle class="s-nofill" r="9"/><path class="s-white" d="M-3-3l6 6M3-3l-6 6"/></g>',
            text(219, 156, 'Tanpa ramuan/bedak', 't s', 'start')]
-    return svg(340, 168, ''.join(out), 'Tali pusat dibiarkan terbuka, bersih, dan kering; popok dilipat di bawah tali pusat; jangan diberi ramuan atau bedak.')
+    return card(340, 168, 'RAWAT TALI PUSAT', ''.join(out), 'Tali pusat dibiarkan terbuka, bersih, dan kering; popok dilipat di bawah tali pusat; jangan diberi ramuan atau bedak.')
 
 # 5) Posisi tidur aman.
 def sleep():
@@ -199,27 +208,24 @@ def sleep():
            '<g transform="translate(244 86) scale(1.25)"><rect class="s-surf s-outline" x="-18" y="-10" width="36" height="20" rx="8"/><circle class="s-nofill" cx="16" cy="-10" r="8"/><path class="s-white" d="M13.5-12.5l5 5M18.5-12.5l-5 5"/></g>',
            '<g transform="translate(302 90) scale(1.25)"><circle class="s-surf s-outline" cx="0" cy="-2" r="10"/><circle class="s-surf s-outline" cx="-7" cy="-11" r="4"/><circle class="s-surf s-outline" cx="7" cy="-11" r="4"/><circle class="s-nofill" cx="13" cy="-11" r="8"/><path class="s-white" d="M10.5-13.5l5 5M15.5-13.5l-5 5"/></g>',
            text(272, 134, 'Tanpa bantal &amp; boneka', 't s')]
-    return svg(340, 150, ''.join(out), 'Bayi tidur telentang di kasur yang rata, tanpa bantal dan boneka di sekitarnya.')
+    return card(340, 150, 'TIDUR AMAN BAYI', ''.join(out), 'Bayi tidur telentang di kasur yang rata, tanpa bantal dan boneka di sekitarnya.')
 
 # 6) Stiker P4K (Program Perencanaan Persalinan & Pencegahan Komplikasi): kartu isian
 #    yang biasa ditempel di rumah ibu hamil. Gaya "form" resmi Kemenkes digambar ulang,
 #    bukan salinan stiker asli.
 def p4k():
-    out = ['<path class="s-surf s-outline" d="M14 8h248l24 24v168a8 8 0 0 1-8 8H14a8 8 0 0 1-8-8V16a8 8 0 0 1 8-8z"/>',
-           '<path class="s-tint" d="M262 8l24 24h-24z"/>',
-           text(150, 40, 'STIKER P4K', 't b ink'),
-           text(150, 56, 'Program Perencanaan Persalinan &amp;', 't s m'),
-           text(150, 70, 'Pencegahan Komplikasi', 't s m'),
-           '<path class="s-line2 thin" d="M22 82h256"/>']
-    rows = [('people', 'Penolong persalinan'), ('hospital', 'Tempat bersalin'),
-            ('car', 'Transportasi'), ('bloodbag', 'Calon donor darah')]
-    for i, (ico, label) in enumerate(rows):
-        y = 110 + i * 34
-        out.append(icon_at(40, y, ico))
-        out.append(text(64, y - 6, label, 't b', 'start'))
-        out.append(f'<path class="s-line2 thin" d="M64 {y + 8}h210"/>')
-    out.append(text(150, 250, 'Ditempel di rumah agar keluarga siap membantu', 't s m'))
-    return svg(300, 264, ''.join(out), 'Stiker P4K: catatan penolong persalinan, tempat bersalin, transportasi, dan calon donor darah, ditempel di rumah ibu hamil.')
+    out = [text(150, 16, 'Program Perencanaan Persalinan &amp;', 't s m'),
+           text(150, 30, 'Pencegahan Komplikasi', 't s m'),
+           '<path class="s-line2 thin" d="M22 42h256"/>']
+    rows = [('people', 'Penolong persalinan', 'ink'), ('hospital', 'Tempat bersalin', 'a'),
+            ('car', 'Transportasi', 'b'), ('bloodbag', 'Calon donor darah', 'ink')]
+    for i, (ico, label, tone) in enumerate(rows):
+        y = 70 + i * 38
+        out.append(icon_at(40, y, ico, tone=tone))
+        out.append(text(68, y - 6, label, 't b', 'start'))
+        out.append(f'<path class="s-line2 thin" d="M68 {y + 10}h206"/>')
+    out.append(text(150, 222, 'Ditempel di rumah agar keluarga siap membantu', 't s m'))
+    return card(300, 234, 'STIKER P4K', ''.join(out), 'Stiker P4K: catatan penolong persalinan, tempat bersalin, transportasi, dan calon donor darah, ditempel di rumah ibu hamil.')
 
 # 7) Sampul "kenali tanda bahaya" untuk ibu hamil.
 def danger_mom():
@@ -233,10 +239,10 @@ def danger_mom():
            '<circle class="s-surf" cx="30" cy="44" r="3.6"/>'
            '</g>',
            '<path class="s-line2 thin" d="M8 160h284"/>']
-    out.append(icon_at(30, 188, 'phone'))
+    out.append(icon_at(30, 188, 'phone', tone='b'))
     out.append(text(52, 182, 'Segera ke bidan atau', 't s', 'start'))
     out.append(text(52, 196, 'faskes terdekat', 't s', 'start'))
-    return svg(300, 208, ''.join(out), 'Ibu hamil dengan tanda bahaya: segera ke bidan atau fasilitas kesehatan terdekat.')
+    return card(300, 208, 'TANDA BAHAYA KEHAMILAN', ''.join(out), 'Ibu hamil dengan tanda bahaya: segera ke bidan atau fasilitas kesehatan terdekat.')
 
 # 8) Sampul "kenali tanda bahaya" untuk bayi baru lahir.
 def danger_baby():
@@ -249,10 +255,10 @@ def danger_baby():
            '<circle class="s-surf" cx="30" cy="44" r="3.6"/>'
            '</g>',
            '<path class="s-line2 thin" d="M8 142h284"/>']
-    out.append(icon_at(30, 170, 'fever'))
+    out.append(icon_at(30, 170, 'fever', tone='b'))
     out.append(text(52, 164, 'Segera ke bidan atau', 't s', 'start'))
     out.append(text(52, 178, 'faskes terdekat', 't s', 'start'))
-    return svg(300, 190, ''.join(out), 'Bayi dengan tanda bahaya: segera ke bidan atau fasilitas kesehatan terdekat.')
+    return card(300, 190, 'TANDA BAHAYA BAYI', ''.join(out), 'Bayi dengan tanda bahaya: segera ke bidan atau fasilitas kesehatan terdekat.')
 
 # 9) Ibu nifas: istirahat, makan bergizi, periksa rutin.
 def nifas_rest():
@@ -261,11 +267,11 @@ def nifas_rest():
            '<path class="s-skin s-outline" d="M40 60c-14 10-20 26-20 48 0 4 2 6 6 6h96c4 0 6-2 6-6 0-22-6-38-20-48"/>',
            '<ellipse class="s-skin s-outline" cx="70" cy="96" rx="34" ry="22"/>',
            '<circle class="s-skin s-outline" cx="70" cy="86" r="12"/>']
-    for i, (ico, label) in enumerate([('moon', 'Istirahat cukup'), ('fish', 'Makan bergizi'), ('clock', 'Periksa rutin')]):
+    for i, (ico, label, tone) in enumerate([('moon', 'Istirahat cukup', 'ink'), ('fish', 'Makan bergizi', 'a'), ('clock', 'Periksa rutin', 'b')]):
         y = 26 + i * 54
-        out.append(icon_at(190, y, ico))
-        out.append(text(212, y - 6, label, 't b', 'start'))
-    return svg(300, 176, ''.join(out), 'Ibu nifas: istirahat cukup, makan bergizi, dan periksa nifas rutin sesuai jadwal.')
+        out.append(icon_at(190, y, ico, tone=tone))
+        out.append(text(216, y - 6, label, 't b', 'start'))
+    return card(340, 176, 'PERAWATAN IBU NIFAS', ''.join(out), 'Ibu nifas: istirahat cukup, makan bergizi, dan periksa nifas rutin sesuai jadwal.')
 
 # 10) Jarak kehamilan minimal 2 tahun, didukung KB pasca persalinan.
 def kb_spacing():
@@ -280,7 +286,7 @@ def kb_spacing():
            '<path class="s-line2" d="M90 94v12M220 94v12"/>',
            text(155, 88, 'Jarak kehamilan', 't b'),
            text(155, 122, 'minimal 2 tahun', 't b ink')]
-    return svg(300, 140, ''.join(out), 'Jarak kehamilan minimal 2 tahun antar anak, didukung KB pasca persalinan.')
+    return card(300, 140, 'JARAK KEHAMILAN AMAN', ''.join(out), 'Jarak kehamilan minimal 2 tahun antar anak, didukung KB pasca persalinan.')
 
 # 11) Imunisasi lengkap melindungi anak.
 def imun_shield():
@@ -292,7 +298,7 @@ def imun_shield():
            '<path class="s-white" d="M26 54l14 14 26-30"/>'
            '</g>',
            ]
-    return svg(300, 148, ''.join(out), 'Bayi yang diimunisasi lengkap sesuai jadwal terlindungi dari penyakit berbahaya.')
+    return card(300, 148, 'IMUNISASI LENGKAP', ''.join(out), 'Bayi yang diimunisasi lengkap sesuai jadwal terlindungi dari penyakit berbahaya.')
 
 ILLUS = {'anc': anc(), 'plate': plate(), 'latch': latch(), 'cord': cord(), 'sleep': sleep(),
          'p4k': p4k(), 'danger_mom': danger_mom(), 'danger_baby': danger_baby(),
