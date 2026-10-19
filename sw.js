@@ -1,6 +1,6 @@
 // Service worker: precache shell, network-first untuk data, cache-first untuk aset statis.
 // Naikkan VERSION setiap kali file shell berubah agar cache lama dibersihkan.
-const VERSION = 'v12';
+const VERSION = 'v13';
 const CACHE = `sehat-ibu-${VERSION}`;
 const SHELL = [
   './',
@@ -8,12 +8,16 @@ const SHELL = [
   'css/app.css',
   'js/icons.js',
   'js/illustrations.js',
+  'js/artwork.js',
   'js/app.js',
   'data/topics.json',
   'manifest.webmanifest',
   'icons/icon.svg',
   'icons/icon-192.png',
   'icons/icon-512.png',
+  'assets/brands/gambiran.png',
+  'assets/brands/sisiwanita.webp',
+  'assets/brands/dokter-dibya.webp',
   'img/illus/anc.jpg',
   'img/illus/plate.jpg',
   'img/illus/latch.jpg',
@@ -35,6 +39,16 @@ const SHELL = [
   'assets/leaflets/perawatan-bayi-baru-lahir.webp',
   'assets/leaflets/tanda-bahaya-bayi.webp',
   'assets/leaflets/imunisasi.webp',
+  'assets/posters/pemeriksaan-kehamilan.webp',
+  'assets/posters/tanda-bahaya-kehamilan.webp',
+  'assets/posters/gizi-ibu-hamil.webp',
+  'assets/posters/persiapan-persalinan.webp',
+  'assets/posters/masa-nifas.webp',
+  'assets/posters/kb-pasca-persalinan.webp',
+  'assets/posters/asi-eksklusif.webp',
+  'assets/posters/perawatan-bayi-baru-lahir.webp',
+  'assets/posters/tanda-bahaya-bayi.webp',
+  'assets/posters/imunisasi.webp',
 ];
 
 self.addEventListener('install', (event) => {

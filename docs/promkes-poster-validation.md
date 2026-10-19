@@ -1,0 +1,10 @@
+# Promkes poster redesign validation — 19 October 2026
+
+- Native tests: `node --test tests/promkes.test.cjs`, 5 passed. Four required poster/metadata/offline assertions failed before implementation and passed after it; unknown-route behavior remained passing.
+- Syntax checks: app, artwork, icons and service worker; `git diff --check` passed.
+- Medical data: `data/topics.json` is byte-for-byte unchanged from commit `8932945`. Browser checks normalized the rendered medical body text, excluding decorative badges/icons, and compared its SHA-256 to the source for all 10 topics at 320, 390, 768 and 1440 px. All 40 scenarios matched; no page overflow, missing source or missing pictogram was found.
+- Home: 10 distinct poster images, 4 icon categories, urgent topic links, responsive 1/2/3-column layout, supplied logos, doctor photo and support footer were inspected in the Codex in-app browser.
+- Cache update: a local server first served the actual baseline commit. Its v12 service worker became active with the old homepage. Switching to the new files and updating activated v13 and removed v12. After reloading, the homepage showed all 10 posters and the support footer. With the browser connection set offline, the previously unopened immunization topic loaded its complete body, source, 960-pixel poster and offline banner. Network emulation was restored afterward.
+- Independent review: no actionable code regressions; all 46 precache entries exist and use relative paths. The reviewer independently reran the five native tests and diff checks.
+- Figma: six editable desktop/mobile layouts; four component families with 32 components. Illustration content is separate from editable text and vectors. PNG equivalents are embedded for Figma rendering; the deployed site uses optimized WebP. Components and image rendering were visually checked and corrected before delivery.
+- Custom domain: GitHub Pages reports an approved certificate for `promkes.dokterdibya.com`; HTTPS access returned 200 with normal certificate validation during pre-release verification. No certificate bypass or security setting change was used.

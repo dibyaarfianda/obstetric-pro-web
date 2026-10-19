@@ -1,5 +1,16 @@
 # Sehat Ibu & Bayi (obstetric-pro-web)
 
+## Tampilan poster ilustratif
+
+Beranda dan seluruh 10 topik menggunakan ilustrasi lokal, ikon kategori, serta blok materi visual. Logo RSUD Gambiran dan SisiWanita, alamat `sisiwanita.id` dengan jarak huruf lebar, foto dokter, dan baris footer “Supported by sisiwanita.id” termasuk dalam tampilan ini. Seluruh isi medis di `data/topics.json` dipertahankan.
+
+- `js/artwork.js`: pemetaan poster dan deskripsi alternatif untuk beranda/detail.
+- `assets/posters/`: 10 ilustrasi WebP orisinal (960 × 640); judul tetap berupa HTML.
+- `assets/brands/`: logo dan foto yang diberikan pengguna.
+- Desain Figma yang dapat diedit: https://www.figma.com/design/LxZ8jjTPrbg02ecE7KSUIS (beranda, gizi, dan tanda bahaya; desktop dan ponsel; 32 komponen dalam 4 keluarga).
+- Pemeriksaan regresi tanpa dependensi tambahan: `node --test tests/promkes.test.cjs`.
+- QA tampilan: 320, 390, 768, dan 1440 px; uji pembaruan service worker v12 → v13 dan akses materi offline.
+
 Website publik promosi kesehatan maternal-neonatal. Dibuka lewat QR code / link di pamflet.
 Mobile-first, responsive, dan berupa PWA (bisa dipasang ke layar utama dan dibaca offline).
 

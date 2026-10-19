@@ -1,6 +1,8 @@
 // Ikon garis sederhana (viewBox 24x24, stroke currentColor) untuk kartu topik.
 // Dipakai lewat nama di field 'icon' pada data/topics.json.
 window.ICONS = {
+  check: '<path d="m5 12 4 4L19 6"/>',
+  shield: '<path d="M12 3 4 6v6c0 5 8 9 8 9s8-4 8-9V6z"/><path d="m8 12 3 3 5-6"/>',
   stethoscope: '<path d="M5 3v5a4 4 0 0 0 8 0V3"/><path d="M9 12v2a5 5 0 0 0 10 0v-2"/><circle cx="19" cy="10" r="2"/><path d="M4 3h2M12 3h2"/>',
   alert: '<path d="M10.3 3.9 2.4 17.5A2 2 0 0 0 4.1 20.5h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/>',
   apple: '<path d="M12 7.5c-1.6-1.4-7-1.9-7 4.2 0 4.8 3 8.8 5 8.8 1 0 1.4-.5 2-.5s1 .5 2 .5c2 0 5-4 5-8.8 0-6.1-5.4-5.6-7-4.2z"/><path d="M12 7.5C12 5.5 13 4 15 3.5"/>',

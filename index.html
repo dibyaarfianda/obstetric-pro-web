@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="css/app.css">
   <script src="js/icons.js" defer></script>
   <script src="js/illustrations.js" defer></script>
+  <script src="js/artwork.js" defer></script>
   <script src="js/app.js" defer></script>
 </head>
 <body>
@@ -23,13 +24,14 @@
       <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
     <a class="app-bar__brand" href="#/" aria-label="Sehat Ibu &amp; Bayi, ke beranda">
-      <img src="icons/icon.svg" alt="" width="36" height="36">
+      <img src="assets/brands/gambiran.png" alt="" width="40" height="40">
       <span class="app-bar__titles">
         <span class="app-bar__name">Sehat Ibu &amp; Bayi</span>
         <span class="app-bar__tagline">Edukasi Kesehatan Ibu &amp; Anak</span>
       </span>
     </a>
-    <button class="app-bar__install" type="button" hidden>Pasang</button>
+    <a class="app-bar__partner" href="https://sisiwanita.id" aria-label="SisiWanita, sisiwanita.id"><img src="assets/brands/sisiwanita.webp" alt="SisiWanita — sisiwanita.id" width="180" height="64"></a>
+    <button class="app-bar__install" type="button" hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 16v4h14v-4"/></svg><span>Pasang</span></button>
   </header>
 
   <main id="view" class="view" tabindex="-1">
@@ -37,8 +39,10 @@
   </main>
 
   <footer class="app-footer">
+    <div class="app-footer__partners"><img src="assets/brands/gambiran.png" alt="Logo RSUD Gambiran Kota Kediri" width="52" height="52"><span aria-hidden="true"></span><a href="https://sisiwanita.id"><img src="assets/brands/sisiwanita.webp" alt="SisiWanita — sisiwanita.id" width="180" height="64"></a></div>
     <p class="app-footer__facility" hidden></p>
     <p>Materi edukasi ini tidak menggantikan pemeriksaan tenaga kesehatan. Segera ke fasilitas kesehatan bila ada tanda bahaya.</p>
+    <p class="app-footer__support">Supported by <a href="https://sisiwanita.id">sisiwanita.id</a></p>
   </footer>
 
   <div class="offline-banner" role="status" hidden>Anda sedang offline. Materi yang pernah dibuka tetap bisa dibaca.</div>

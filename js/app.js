@@ -8,17 +8,12 @@
   const offlineBanner = document.querySelector('.offline-banner');
   const footerFacility = document.querySelector('.app-footer__facility');
   const ICONS = window.ICONS || {};
-  const LEAFLETS = {
-    'pemeriksaan-kehamilan': 'Bidan memeriksa tekanan darah ibu hamil dengan pendamping keluarga.',
-    'tanda-bahaya-kehamilan': 'Ibu hamil berkonsultasi dengan tenaga kesehatan saat khawatir akan tanda bahaya.',
-    'gizi-ibu-hamil': 'Ibu hamil dan pasangan menyiapkan makanan beragam dengan lauk, sayur, dan buah.',
-    'persiapan-persalinan': 'Calon orang tua menyiapkan tas persalinan sambil berdiskusi dengan bidan.',
-    'masa-nifas': 'Ibu beristirahat setelah melahirkan sementara keluarga membantu merawat rumah.',
-    'kb-pasca-persalinan': 'Orang tua berkonsultasi dengan tenaga kesehatan tentang perencanaan keluarga.',
-    'asi-eksklusif': 'Ibu menyusui bayinya dengan dukungan pasangan di rumah.',
-    'perawatan-bayi-baru-lahir': 'Orang tua merawat bayi baru lahir dan menyiapkan pakaiannya.',
-    'tanda-bahaya-bayi': 'Orang tua membawa bayi baru lahir ke tenaga kesehatan untuk segera diperiksa.',
-    imunisasi: 'Orang tua berkonsultasi dengan tenaga kesehatan mengenai imunisasi bayi.',
+  const ARTWORK = window.TOPIC_ARTWORK || {};
+  const CATEGORY_META = {
+    kehamilan: { icon: 'fetus', label: 'Untuk ibu hamil' },
+    persalinan: { icon: 'hospital', label: 'Siap menyambut bayi' },
+    nifas: { icon: 'heart', label: 'Pulih & rencanakan' },
+    bayi: { icon: 'baby', label: 'Awal tumbuh sehat' },
   };
   let appTitle = document.title;
 
@@ -48,7 +43,11 @@
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => (
     { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
   ));
-  const icon = (name, cls = '') => `<svg class="icon ${cls}" viewBox="0 0 24 24" aria-hidden="true">${ICONS[name] || ICONS.book}</svg>`;
+  const icon = (name, cls = '') => `<svg class="icon ${cls}" viewBox="0 0 24 24" aria-hidden="true">${ICONS[name] || (window.PICTO || {})[name] || ICONS.book}</svg>`;
+  const poster = (t, cls, eager = false) => {
+    const art = ARTWORK[t.slug];
+    return art ? `<img class="${cls}" src="${esc(art.src)}" alt="${esc(art.alt)}" width="960" height="640" decoding="async" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'}>` : '';
+  };
 
   // ---------- Tampilan ----------
 
@@ -56,9 +55,11 @@
     return `
       <li>
         <a class="tile" href="#/topik/${esc(t.slug)}" data-cat="${esc(t.category)}" data-slug="${esc(t.slug)}">
-          <span class="tile__icon">${icon(t.icon)}</span>
-          <span class="tile__title">${esc(t.title)}</span>
-          <span class="tile__summary">${esc(t.summary)}</span>
+          <span class="tile__art">${poster(t, 'tile__image')}<span class="tile__icon">${icon(t.icon)}</span>${t.urgent ? `<span class="tile__urgent">${icon('alert')} Waspada</span>` : ''}</span>
+          <span class="tile__content">
+            <span class="tile__title">${esc(t.title)}</span>
+            <span class="tile__footer"><span class="tile__pictos">${(ARTWORK[t.slug]?.icons || [t.icon]).map(n => icon(n)).join('')}</span><span class="tile__arrow">${icon('arrowRight')}</span></span>
+          </span>
         </a>
       </li>`;
   }
@@ -75,8 +76,18 @@
 
     view.innerHTML = `
       <section class="hero">
-        <h1>Informasi sehat untuk Ibu &amp; Bayi</h1>
-        <p>Materi edukasi seputar kehamilan, persalinan, nifas, dan bayi baru lahir. Pilih topik untuk membaca.</p>
+        <div class="hero__copy">
+          <p class="eyebrow">${icon('heart')} TEMAN BELAJAR KELUARGA</p>
+          <h1>Ibu sehat.<br><span>Bayi hebat.</span></h1>
+          <p class="hero__lead">Kenali, pahami, dan rawat bersama.<br>Panduan bergambar untuk ibu dan si kecil.</p>
+          <a class="button hero__button" href="#materi" data-explore>${icon('book')} Jelajahi materi ${icon('arrowRight')}</a>
+        </div>
+        <div class="hero__art" aria-hidden="true">
+          <img src="${esc(ARTWORK['pemeriksaan-kehamilan']?.src || 'assets/leaflets/pemeriksaan-kehamilan.webp')}" alt="" width="960" height="640" fetchpriority="high">
+          <span class="hero__sticker hero__sticker--heart">${icon('heart')}</span>
+          <span class="hero__sticker hero__sticker--baby">${icon('baby')}</span>
+          <span class="hero__caption">${icon('shield')} Langkah kecil, keluarga sehat</span>
+        </div>
       </section>
 
       ${urgent.length ? `
@@ -87,22 +98,28 @@
           <span>Bila muncul, segera ke fasilitas kesehatan terdekat.</span>
         </div>
         <div class="alert-strip__links">
-          ${urgent.map((t) => `<a href="#/topik/${esc(t.slug)}">${esc(t.title.replace(/^Tanda Bahaya\s*/i, '') || t.title)}</a>`).join('')}
+          ${urgent.map((t) => `<a href="#/topik/${esc(t.slug)}">${icon(CATEGORY_META[t.category]?.icon || 'alert')}${esc(t.title.replace(/^Tanda Bahaya\s*/i, '') || t.title)}${icon('arrowRight')}</a>`).join('')}
         </div>
       </aside>` : ''}
 
       <nav class="chips" aria-label="Kategori">
-        ${groups.map((g) => `<button type="button" class="chip" data-cat="${esc(g.id)}" data-target="kat-${esc(g.id)}">${esc(g.title)}</button>`).join('')}
+        ${groups.map((g) => `<button type="button" class="chip" data-cat="${esc(g.id)}" data-target="kat-${esc(g.id)}"><span class="chip__icon">${icon(CATEGORY_META[g.id]?.icon || 'book')}</span><span class="chip__label">${esc(g.title)}<small>${esc(CATEGORY_META[g.id]?.label || 'Materi kesehatan')}</small></span></button>`).join('')}
       </nav>
+
+      <div class="library-heading" id="materi"><p class="eyebrow">${icon('book')} PILIH &amp; PELAJARI</p><h2>Bekal sehat untuk keluarga</h2><span>${topics.length} materi bergambar</span></div>
 
       ${groups.map((g) => `
         <section class="group" id="kat-${esc(g.id)}" data-cat="${esc(g.id)}" aria-labelledby="h-${esc(g.id)}">
           <header class="group__head">
-            <h2 id="h-${esc(g.id)}">${esc(g.title)}</h2>
-            ${g.summary ? `<p>${esc(g.summary)}</p>` : ''}
+            <span class="group__icon">${icon(CATEGORY_META[g.id]?.icon || 'book')}</span>
+            <h2 id="h-${esc(g.id)}">${esc(g.title)}</h2><span class="group__count">${g.topics.length} materi</span>
           </header>
           <ul class="tile-grid">${g.topics.map(topicCard).join('')}</ul>
-        </section>`).join('')}`;
+        </section>`).join('')}
+      <section class="doctor-note" aria-labelledby="doctor-heading">
+        <div class="doctor-note__photo"><img src="assets/brands/dokter-dibya.webp" alt="Foto dokter untuk pendamping edukasi kesehatan ibu dan anak" width="360" height="600" loading="lazy"></div>
+        <div class="doctor-note__copy"><p class="eyebrow">${icon('stethoscope')} BELAJAR BERSAMA DOKTER</p><h2 id="doctor-heading">Lebih paham,<br>lebih siap merawat.</h2><p>Setiap keluarga punya pertanyaan. Kenali panduannya, catat yang ingin ditanyakan, lalu diskusikan bersama bidan atau dokter saat periksa.</p><div class="doctor-note__brand"><span>Didukung oleh</span><a href="https://sisiwanita.id"><img src="assets/brands/sisiwanita.webp" alt="SisiWanita — sisiwanita.id" width="180" height="64"></a></div></div>
+      </section>`;
   }
 
   function renderTopic(topic, { categories, topics }) {
@@ -124,9 +141,10 @@
           </div>
         </header>
 
-        ${LEAFLETS[topic.slug] ? `
+        ${ARTWORK[topic.slug] ? `
         <figure class="topic__leaflet">
-          <img src="assets/leaflets/${esc(topic.slug)}.webp" alt="${esc(LEAFLETS[topic.slug])}" width="960" height="640" decoding="async">
+          ${poster(topic, 'topic__poster', true)}
+          <figcaption>${(ARTWORK[topic.slug].icons || []).map(n => icon(n)).join('')}<span>Pahami dengan gambar, praktikkan bersama.</span></figcaption>
         </figure>` : ''}
 
         <div class="topic__body">
@@ -163,8 +181,36 @@
   // Pasang gambar materi: piktogram untuk elemen [data-ico], ilustrasi (foto AI) untuk <figure data-illus>.
   function hydrate(root) {
     const picto = window.PICTO || {};
+    // Keep the source copy intact; group existing content into visual sections.
+    const sections = [];
+    let section;
+    [...root.children].forEach((el) => {
+      if (el.tagName === 'H2') {
+        section = document.createElement('section');
+        section.className = 'info-section';
+        root.insertBefore(section, el);
+        sections.push(section);
+        const badge = document.createElement('span');
+        badge.className = 'section-badge';
+        badge.setAttribute('aria-hidden', 'true');
+        badge.textContent = String(sections.length).padStart(2, '0');
+        el.prepend(badge);
+      }
+      if (el.matches('.source')) section = null;
+      if (section) section.appendChild(el);
+    });
+    const defaultIcons = ['check', 'heart', 'book'];
+    root.querySelectorAll('ul:not(.signs):not(.pict-list):not(.pict-grid)').forEach((list) => {
+      list.classList.add('pict-list', 'pict-list--plain');
+      [...list.children].forEach((el, i) => {
+        el.dataset.ico = defaultIcons[i % defaultIcons.length];
+        const text = document.createElement('span');
+        while (el.firstChild) text.appendChild(el.firstChild);
+        el.appendChild(text);
+      });
+    });
     root.querySelectorAll('[data-ico]').forEach((el) => {
-      const svg = picto[el.dataset.ico];
+      const svg = picto[el.dataset.ico] || ICONS[el.dataset.ico];
       if (svg) el.insertAdjacentHTML('afterbegin', `<span class="pict" aria-hidden="true"><svg viewBox="0 0 24 24">${svg}</svg></span>`);
     });
     root.querySelectorAll('figure[data-illus]').forEach((el) => {
@@ -264,6 +310,11 @@
 
   let pendingDir = null;
   document.addEventListener('click', (e) => {
+    const explore = e.target.closest('[data-explore]');
+    if (explore) {
+      e.preventDefault();
+      document.getElementById('materi')?.scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth', block: 'start' });
+    }
     const a = e.target.closest('a[href^="#/"]');
     if (a && a.dataset.dir === 'back') pendingDir = 'back';
     const chip = e.target.closest('.chip');
