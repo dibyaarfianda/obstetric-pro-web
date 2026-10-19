@@ -46,13 +46,15 @@ Buka http://localhost:8080. Service worker hanya aktif di `localhost` atau HTTPS
 ## Publikasi (GitHub Pages)
 
 Situs dipublikasikan otomatis oleh `.github/workflows/pages.yml` setiap ada push ke `main`,
-ke alamat **https://dibyaarfianda.github.io/obstetric-pro-web/** (HTTPS otomatis dari GitHub).
+ke alamat **https://promkes.dokterdibya.com/** (file `CNAME` ikut disalin; alamat lama
+https://dibyaarfianda.github.io/obstetric-pro-web/ dialihkan otomatis oleh GitHub).
 
 Aktivasi sekali saja: repo **Settings > Pages > Build and deployment > Source: GitHub Actions**.
 Setelah itu jalankan workflow dari tab **Actions** (atau tunggu push berikutnya ke `main`).
 
-Domain sendiri (opsional): isi **Settings > Pages > Custom domain** (mis. `edukasi.contoh-rs.go.id`),
-buat record DNS `CNAME` ke `dibyaarfianda.github.io`, lalu centang **Enforce HTTPS**.
+Domain sendiri: record DNS `CNAME` `promkes` -> `dibyaarfianda.github.io` di pengelola DNS
+`dokterdibya.com`, isi **Settings > Pages > Custom domain** dengan `promkes.dokterdibya.com`,
+lalu centang **Enforce HTTPS** setelah sertifikat terbit.
 Semua path di situs relatif, jadi tidak perlu mengubah kode. Buat ulang QR code setelah pindah domain.
 
 ## QR code

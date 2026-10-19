@@ -11,7 +11,7 @@ import qrcode
 import qrcode.image.svg
 from PIL import Image, ImageDraw, ImageFont
 
-URL = sys.argv[1] if len(sys.argv) > 1 else "https://dibyaarfianda.github.io/obstetric-pro-web/"
+URL = sys.argv[1] if len(sys.argv) > 1 else "https://promkes.dokterdibya.com/"
 OUT = Path(__file__).parent
 BRAND = "#c2185b"
 FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSans{}.ttf"
