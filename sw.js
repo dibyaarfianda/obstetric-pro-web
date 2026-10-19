@@ -1,15 +1,16 @@
 // Service worker: precache shell, network-first untuk data, cache-first untuk aset statis.
-// Naikkan VERSION setiap kali file shell berubah agar cache lama dibersihkan.
-const VERSION = 'v14';
+// Naikkan VERSION serta query versi CSS/JS di SHELL dan index.html saat shell berubah.
+const VERSION = 'v15';
 const CACHE = `sehat-ibu-${VERSION}`;
 const SHELL = [
   './',
   'index.html',
-  'css/app.css',
-  'js/icons.js',
-  'js/illustrations.js',
-  'js/artwork.js',
-  'js/app.js',
+  'css/app.css?v=15',
+  'js/pwa.js?v=15',
+  'js/icons.js?v=15',
+  'js/illustrations.js?v=15',
+  'js/artwork.js?v=15',
+  'js/app.js?v=15',
   'data/topics.json',
   'manifest.webmanifest',
   'icons/icon.svg',
@@ -52,7 +53,7 @@ const SHELL = [
 ];
 
 self.addEventListener('install', (event) => {
-  event.waitUntil(caches.open(CACHE).then((c) => c.addAll(SHELL)).then(() => self.skipWaiting()));
+  event.waitUntil(caches.open(CACHE).then((c) => c.addAll(SHELL.map(url => new Request(url, { cache: 'reload' })))).then(() => self.skipWaiting()));
 });
 
 self.addEventListener('activate', (event) => {
@@ -66,7 +67,7 @@ self.addEventListener('activate', (event) => {
 async function networkFirst(request) {
   const cache = await caches.open(CACHE);
   try {
-    const res = await fetch(request);
+    const res = await fetch(request, { cache: 'no-cache' });
     if (res.ok) cache.put(request, res.clone());
     return res;
   } catch {

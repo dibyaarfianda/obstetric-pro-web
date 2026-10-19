@@ -1,4 +1,4 @@
-// Shell aplikasi: router hash, render beranda & halaman topik, transisi antar halaman, registrasi service worker.
+// Shell aplikasi: router hash, render beranda & halaman topik, transisi antar halaman.
 (() => {
   'use strict';
 
@@ -287,7 +287,17 @@
     const update = () => {
       render(path, data);
       currentPath = path;
-      window.scrollTo(0, goingHome ? homeScroll.y : 0);
+      let updateScroll = null;
+      try {
+        const saved = sessionStorage.getItem('promkes:update-scroll');
+        if (saved) {
+          sessionStorage.removeItem('promkes:update-scroll');
+          const position = JSON.parse(saved);
+          if (position.url === location.href && Number.isFinite(position.y)) updateScroll = Math.max(0, position.y);
+        }
+      } catch { /* Navigasi tetap berjalan bila penyimpanan sesi tidak tersedia. */ }
+      if (goingHome && updateScroll !== null) homeScroll.y = updateScroll;
+      window.scrollTo(0, updateScroll ?? (goingHome ? homeScroll.y : 0));
       if (sharedSlug && (from === '/' || goingHome)) tagIcon(sharedSlug);
     };
 
@@ -357,9 +367,4 @@
   });
   window.addEventListener('appinstalled', () => { installBtn.hidden = true; });
 
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js').catch(() => {});
-    });
-  }
 })();
