@@ -7,3 +7,5 @@ Shared direction: friendly Indonesian public-health editorial cartoons; clean ro
 Scene prompts: midwife checking prenatal blood pressure; pregnant mother and partner seeking urgent advice; diverse balanced meal; parents preparing a maternity bag; postpartum rest and family support; parents discussing family planning; safely supported breastfeeding; parents caring for a newborn on a flat mat; parents bringing a baby to a doctor; calm vaccination visit with a shield symbol.
 
 The original user-supplied Gambiran logo and doctor photograph are in `assets/brands/`. The SisiWanita logo was edited with Imagegen to add the exact domain `sisiwanita.id` below the original teal script, then widened with generous tracking at the user's request. The original supplied files were preserved.
+
+The `sisiwanita-transparent.webp` and `dokter-dibya-transparent.webp` versions remove the image backgrounds with Imagegen, retain alpha transparency, and are used throughout the live UI. The previous image versions remain preserved. Figma uses equivalent transparent PNG exports.

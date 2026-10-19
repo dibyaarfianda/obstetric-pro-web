@@ -117,8 +117,8 @@
           <ul class="tile-grid">${g.topics.map(topicCard).join('')}</ul>
         </section>`).join('')}
       <section class="doctor-note" aria-labelledby="doctor-heading">
-        <div class="doctor-note__photo"><img src="assets/brands/dokter-dibya.webp" alt="Foto dokter untuk pendamping edukasi kesehatan ibu dan anak" width="360" height="600" loading="lazy"></div>
-        <div class="doctor-note__copy"><p class="eyebrow">${icon('stethoscope')} BELAJAR BERSAMA DOKTER</p><h2 id="doctor-heading">Lebih paham,<br>lebih siap merawat.</h2><p>Setiap keluarga punya pertanyaan. Kenali panduannya, catat yang ingin ditanyakan, lalu diskusikan bersama bidan atau dokter saat periksa.</p><div class="doctor-note__brand"><span>Didukung oleh</span><a href="https://sisiwanita.id"><img src="assets/brands/sisiwanita.webp" alt="SisiWanita — sisiwanita.id" width="180" height="64"></a></div></div>
+        <div class="doctor-note__photo"><img src="assets/brands/dokter-dibya-transparent.webp" alt="Foto dokter untuk pendamping edukasi kesehatan ibu dan anak" width="360" height="600" loading="lazy"></div>
+        <div class="doctor-note__copy"><p class="eyebrow">${icon('stethoscope')} BELAJAR BERSAMA DOKTER</p><h2 id="doctor-heading">Lebih paham,<br>lebih siap merawat.</h2><p>Setiap keluarga punya pertanyaan. Kenali panduannya, catat yang ingin ditanyakan, lalu diskusikan bersama bidan atau dokter saat periksa.</p><div class="doctor-note__brand"><span>Didukung oleh</span><a href="https://sisiwanita.id"><img src="assets/brands/sisiwanita-transparent.webp" alt="SisiWanita — sisiwanita.id" width="180" height="64"></a></div></div>
       </section>`;
   }
 

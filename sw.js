@@ -1,6 +1,6 @@
 // Service worker: precache shell, network-first untuk data, cache-first untuk aset statis.
 // Naikkan VERSION setiap kali file shell berubah agar cache lama dibersihkan.
-const VERSION = 'v13';
+const VERSION = 'v14';
 const CACHE = `sehat-ibu-${VERSION}`;
 const SHELL = [
   './',
@@ -16,8 +16,8 @@ const SHELL = [
   'icons/icon-192.png',
   'icons/icon-512.png',
   'assets/brands/gambiran.png',
-  'assets/brands/sisiwanita.webp',
-  'assets/brands/dokter-dibya.webp',
+  'assets/brands/sisiwanita-transparent.webp',
+  'assets/brands/dokter-dibya-transparent.webp',
   'img/illus/anc.jpg',
   'img/illus/plate.jpg',
   'img/illus/latch.jpg',
