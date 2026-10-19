@@ -1,16 +1,16 @@
 // Service worker: precache shell, network-first untuk data, cache-first untuk aset statis.
 // Naikkan VERSION serta query versi CSS/JS di SHELL dan index.html saat shell berubah.
-const VERSION = 'v16';
+const VERSION = 'v17';
 const CACHE = `sehat-ibu-${VERSION}`;
 const SHELL = [
   './',
   'index.html',
-  'css/app.css?v=16',
-  'js/pwa.js?v=16',
-  'js/icons.js?v=16',
-  'js/illustrations.js?v=16',
-  'js/artwork.js?v=16',
-  'js/app.js?v=16',
+  'css/app.css?v=17',
+  'js/pwa.js?v=17',
+  'js/icons.js?v=17',
+  'js/illustrations.js?v=17',
+  'js/artwork.js?v=17',
+  'js/app.js?v=17',
   'data/topics.json',
   'manifest.webmanifest',
   'icons/icon.svg',

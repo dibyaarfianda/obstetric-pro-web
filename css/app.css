@@ -675,15 +675,13 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--brand); outline
 .related__item { min-height: 65px; font-size: 13px; }
 .pager__title { font-size: 12px; line-height: 1.5; }
 .topic > .button { width: 100%; font-size: 13px; }
-.doctor-note { display: grid; grid-template-columns: minmax(0,1fr); gap: 24px; align-items: center; margin-top: 42px; padding: 24px 16px; background: #f4f8f7; border: 1px solid #e2eeea; border-radius: 24px; overflow: hidden; }
-.doctor-note__copy { min-width: 0; }
-.doctor-note .eyebrow { color: #48857b; font-size: 8px; letter-spacing: .7px; line-height: 1.5; }
-.doctor-note h2 { margin: 12px 0 10px; font-size: 21px; line-height: 1.2; letter-spacing: -.6px; }
-.doctor-note__copy > p:not(.eyebrow) { margin: 0; font-size: 11px; line-height: 1.7; color: #65756f; }
-.doctor-note__brand { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 15px; font-size: 9px; color: #65756f; }
-.doctor-note__brand img { width: 120px; height: auto; }
-.doctor-team { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; width: 100%; max-width: 500px; justify-self: center; }
-.doctor-profile { min-width: 0; margin: 0; overflow: hidden; border: 1px solid #e2eae7; border-radius: 18px; background: #fff; }
+.doctor-note { margin-top: 42px; }
+.doctor-note__head { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 20px; }
+.doctor-note__icon { display: grid; place-items: center; flex: 0 0 36px; height: 36px; border-radius: 12px; background: #eaf4f0; color: #48857b; }
+.doctor-note__icon .icon { width: 20px; height: 20px; }
+.doctor-note h2 { margin: 0; font-size: 20px; line-height: 1.35; letter-spacing: -.5px; }
+.doctor-team { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; width: 100%; max-width: 760px; margin-inline: auto; }
+.doctor-profile { min-width: 0; margin: 0; overflow: hidden; border: 1px solid #e2eae7; border-radius: 18px; background: #fff; box-shadow: var(--shadow); }
 .doctor-profile__portrait { height: 185px; overflow: hidden; background: #fceef3; }
 .doctor-profile--pediatric .doctor-profile__portrait { background: #eaf4fb; }
 .doctor-profile__portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
@@ -747,15 +745,12 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--brand); outline
   .topic__body .steps { grid-template-columns: repeat(4,minmax(0,1fr)); }
   .topic__body .signs { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .topic__leaflet figcaption { font-size: 12px; }
-  .doctor-note { gap: 28px; padding: 32px 36px; }
-  .doctor-profile__portrait { height: 260px; }
+  .doctor-team { gap: 20px; }
+  .doctor-profile__portrait { height: 300px; }
   .doctor-profile figcaption { padding: 16px; }
   .doctor-profile h3 { font-size: 13px; }
   .doctor-profile__specialty { font-size: 10px; }
-  .doctor-note h2 { font-size: 32px; }
-  .doctor-note .eyebrow { font-size: 10px; }
-  .doctor-note__copy > p:not(.eyebrow) { font-size: 13px; }
-  .doctor-note__brand { font-size: 10px; }
+  .doctor-note h2 { font-size: 28px; }
 }
 @media (min-width: 960px) {
   .hero { min-height: 378px; }
@@ -777,20 +772,15 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--brand); outline
   .tile:hover .tile__image { transform: scale(1.025); }
   .tile__title { font-size: 17px; }
   .tile__urgent { font-size: 10px; right: 12px; top: 12px; padding: 6px 9px; }
-  .doctor-note { grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr); gap: 42px; padding: 36px 44px; }
-  .doctor-note__copy { max-width: 470px; }
-  .doctor-note h2 { font-size: 38px; }
-  .doctor-note__copy > p:not(.eyebrow) { font-size: 14px; }
 }
 @media (max-width: 359px) {
   .hero h1 { font-size: 36px; }
   .chip { flex-direction: column; align-items: flex-start; }
-  .doctor-note { padding: 20px 12px; }
   .doctor-team { gap: 8px; }
   .doctor-profile__portrait { height: 160px; }
   .doctor-profile figcaption { padding: 10px 8px 12px; }
   .doctor-profile h3 { font-size: 10px; }
-  .doctor-note h2 { font-size: 19px; }
+  .doctor-note h2 { font-size: 18px; }
   .app-bar { gap: 8px; }
   .app-bar__name { font-size: 11px; }
   .app-bar__tagline { font-size: 8.5px; }

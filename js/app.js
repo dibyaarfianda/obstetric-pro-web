@@ -117,7 +117,7 @@
           <ul class="tile-grid">${g.topics.map(topicCard).join('')}</ul>
         </section>`).join('')}
       <section class="doctor-note" aria-labelledby="doctor-heading">
-        <div class="doctor-note__copy"><p class="eyebrow">${icon('stethoscope')} BELAJAR BERSAMA DOKTER</p><h2 id="doctor-heading">Lebih paham,<br>lebih siap merawat.</h2><p>Setiap keluarga punya pertanyaan. Kenali panduannya, catat yang ingin ditanyakan, lalu diskusikan bersama bidan atau dokter saat periksa.</p><div class="doctor-note__brand"><span>Didukung oleh</span><a href="https://sisiwanita.id"><img src="assets/brands/sisiwanita-transparent.webp" alt="SisiWanita — sisiwanita.id" width="180" height="64"></a></div></div>
+        <header class="doctor-note__head"><span class="doctor-note__icon">${icon('stethoscope')}</span><h2 id="doctor-heading">Belajar Bersama Dokter</h2></header>
         <div class="doctor-team">
           <figure class="doctor-profile doctor-profile--maternal">
             <div class="doctor-profile__portrait"><img src="assets/brands/dokter-dibya-transparent.webp" alt="dr. Dibya Arfianda, Sp.OG, M.Ked.Klin." width="480" height="1030" loading="lazy"></div>
