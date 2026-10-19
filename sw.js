@@ -1,16 +1,16 @@
 // Service worker: precache shell, network-first untuk data, cache-first untuk aset statis.
 // Naikkan VERSION serta query versi CSS/JS di SHELL dan index.html saat shell berubah.
-const VERSION = 'v15';
+const VERSION = 'v16';
 const CACHE = `sehat-ibu-${VERSION}`;
 const SHELL = [
   './',
   'index.html',
-  'css/app.css?v=15',
-  'js/pwa.js?v=15',
-  'js/icons.js?v=15',
-  'js/illustrations.js?v=15',
-  'js/artwork.js?v=15',
-  'js/app.js?v=15',
+  'css/app.css?v=16',
+  'js/pwa.js?v=16',
+  'js/icons.js?v=16',
+  'js/illustrations.js?v=16',
+  'js/artwork.js?v=16',
+  'js/app.js?v=16',
   'data/topics.json',
   'manifest.webmanifest',
   'icons/icon.svg',
@@ -19,6 +19,7 @@ const SHELL = [
   'assets/brands/gambiran.png',
   'assets/brands/sisiwanita-transparent.webp',
   'assets/brands/dokter-dibya-transparent.webp',
+  'assets/brands/dokter-ike-transparent.webp',
   'img/illus/anc.jpg',
   'img/illus/plate.jpg',
   'img/illus/latch.jpg',

@@ -9,3 +9,5 @@ Scene prompts: midwife checking prenatal blood pressure; pregnant mother and par
 The original user-supplied Gambiran logo and doctor photograph are in `assets/brands/`. The SisiWanita logo was edited with Imagegen to add the exact domain `sisiwanita.id` below the original teal script, then widened with generous tracking at the user's request. The original supplied files were preserved.
 
 The `sisiwanita-transparent.webp` and `dokter-dibya-transparent.webp` versions remove the image backgrounds with Imagegen, retain alpha transparency, and are used throughout the live UI. The previous image versions remain preserved. Figma uses equivalent transparent PNG exports.
+
+The user-supplied pediatrician photograph was likewise edited with Imagegen to remove only its background and saved as `dokter-ike-transparent.webp`. The two doctor captions are HTML text using the names and qualifications supplied by the user.

@@ -1,8 +1,8 @@
 {
   "_note": "Isi materi tiap topik ditulis di field 'body' (HTML sederhana). 'icon' merujuk ke ikon di js/icons.js; warna kartu mengikuti kategori.",
   "site": {
-    "name": "Sehat Ibu & Bayi",
-    "tagline": "Edukasi Kesehatan Ibu & Anak",
+    "name": "Promkes Digital Maternal-Neonatal Terpadu RSUD Gambiran",
+    "tagline": "Inovasi Tiada Henti, Layanan Semakin Pasti",
     "facility": "RSUD Gambiran Kota Kediri"
   },
   "categories": [

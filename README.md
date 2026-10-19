@@ -1,4 +1,6 @@
-# Sehat Ibu & Bayi (obstetric-pro-web)
+# Promkes Digital Maternal-Neonatal Terpadu RSUD Gambiran (obstetric-pro-web)
+
+Inovasi Tiada Henti, Layanan Semakin Pasti.
 
 ## Tampilan poster ilustratif
 

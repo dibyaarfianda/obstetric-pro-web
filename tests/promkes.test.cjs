@@ -12,7 +12,7 @@ async function render(hash = '#/', options = {}) {
   const view = { innerHTML: '', focus() {}, querySelector: () => body, classList: { remove() {}, add() {} } };
   const control = () => ({ hidden: true, addEventListener() {} });
   const context = {
-    document: { title: 'Sehat Ibu & Bayi', getElementById: () => view, querySelector: control,
+    document: { title: data.site.name, getElementById: () => view, querySelector: control,
       querySelectorAll: () => [], addEventListener() {}, documentElement: { dataset: {} } },
     location: { hash, href: `https://promkes.test/${hash}`, reload: options.reload || (() => {}) }, history: { length: 1 },
     navigator: { onLine: true, ...options.navigator }, sessionStorage: options.sessionStorage,
